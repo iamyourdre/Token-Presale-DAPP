@@ -8,11 +8,11 @@ const ConnectWallet = () => {
   return (
     <>
       {wallet ? (
-        <button className="btn rounded-full" onClick={disconnectWallet} disabled={loading}>
+        <button className="btn btn-default" onClick={disconnectWallet} disabled={loading}>
           🔗 {wallet.slice(0, 6)}...{wallet.slice(-4)}
         </button>
       ) : (
-        <button className="btn btn-neutral rounded-full" onClick={connectWallet} disabled={loading}>
+        <button className="btn btn-neutral" onClick={connectWallet} disabled={loading}>
           {loading ? <Loading /> : 'Connect Wallet'}
         </button>
       )}

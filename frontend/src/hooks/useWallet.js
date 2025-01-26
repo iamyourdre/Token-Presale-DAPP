@@ -5,6 +5,8 @@ import { WalletContext } from '../contexts/WalletContext';
 const useWallet = () => {
   const { wallet, setWallet } = useContext(WalletContext);
   const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(null);
+  const [shouldAutoConnect, setShouldAutoConnect] = useState(true);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -19,6 +21,9 @@ const useWallet = () => {
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: '0xaa36a7' }], // Sepolia chain ID
         });
+
+        const balance = await web3.eth.getBalance(accounts[0]);
+        setBalance(web3.utils.fromWei(balance, 'ether'));
       } catch (error) {
         console.error("Error connecting to wallet", error);
       } finally {
@@ -31,11 +36,14 @@ const useWallet = () => {
 
   const disconnectWallet = () => {
     setWallet(null);
+    setBalance(null);
+    setShouldAutoConnect(false);
+    window.location.reload(); // Reload the page to reset the state
   };
 
   useEffect(() => {
     const checkWalletConnection = async () => {
-      if (window.ethereum) {
+      if (shouldAutoConnect && window.ethereum) {
         const web3 = new Web3(window.ethereum);
         const accounts = await web3.eth.getAccounts();
         if (accounts.length > 0) {
@@ -45,14 +53,17 @@ const useWallet = () => {
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: '0xaa36a7' }], // Sepolia chain ID
           });
+
+          const balance = await web3.eth.getBalance(accounts[0]);
+          setBalance(web3.utils.fromWei(balance, 'ether'));
         }
       }
     };
 
     checkWalletConnection();
-  }, [setWallet]);
+  }, [shouldAutoConnect, setWallet]);
 
-  return { wallet, connectWallet, disconnectWallet, loading };
+  return { wallet, connectWallet, disconnectWallet, loading, balance };
 };
 
 export default useWallet;

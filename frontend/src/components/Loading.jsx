@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loading = ({size}) => {
   return (
-    <span className={`loading loading-dots loading-${size || "xs"}`}></span>
+    <span className={`loading loading-ring loading-${size || "xs"}`}></span>
   )
 }
 
