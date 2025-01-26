@@ -10,16 +10,8 @@ const Navbar = () => {
       url: '/'
     },
     {
-      name: '1. Incrementer',
-      url: '/_01'
-    },
-    {
-      name: '2. Transaction',
-      url: '/_02'
-    },
-    {
-      name: '3. ERC20 Token',
-      url: '/_03'
+      name: 'Presale',
+      url: '/presale'
     }
 
   ]
