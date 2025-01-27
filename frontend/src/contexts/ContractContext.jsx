@@ -68,13 +68,13 @@ export const ContractProvider = ({ children }) => {
     if (presaleContract) {
       const fetchPresaleInfo = async () => {
         const rate = await presaleContract.methods.rate().call();
-        const wallet = await presaleContract.methods.wallet().call();
+        const owner = await presaleContract.methods.owner().call();
         const token = await presaleContract.methods.token().call();
-        const presaleSupply = await tokenContract.methods.balanceOf('0x0Fecc4DD1fC3E9708Ed94FE6330d5d5D1e730a26').call();
+        const presaleSupply = await tokenContract.methods.balanceOf(owner).call();
 
         setPresale({
           rate,
-          wallet,
+          owner,
           token,
           presaleSupply
         });
