@@ -17,7 +17,7 @@ export const showToastPromise = (promise) => {
       error: 'Something went wrong!'
     },
     {
-      duration: 5000,
+      duration: 10000,
     }
   );
 };

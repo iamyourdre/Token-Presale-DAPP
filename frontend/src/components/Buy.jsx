@@ -3,6 +3,7 @@ import { ContractContext } from '../contexts/ContractContext';
 import Loading from './Loading';
 import useWallet from '../hooks/useWallet';
 import ConnectWallet from './ConnectWallet';
+import { showToastPromise } from '../utils/toastUtils';
 
 const Buy = () => {
   const { loading: contractLoading, web3, tokenInfo, presale, presaleContract, decimalConversion } = useContext(ContractContext);
@@ -10,6 +11,7 @@ const Buy = () => {
   const [ethValue, setEthValue] = useState("0");
   const [buyValue, setBuyValue] = useState("0");
   const {loading: walletLoading, wallet, balance} = useWallet();
+  const [buyLoading, setBuyLoading] = useState(false);
 
   const handleEthValueChange = (e) => {
     const value = e.target.value;
@@ -33,21 +35,22 @@ const Buy = () => {
 
   const handleBuy = async () => {
     if (!wallet || !presaleContract) return;
+    setBuyLoading(true);
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
 
-    try {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const account = accounts[0];
+    const sendTx = presaleContract.methods.buyTokens(account).send({
+      from: account,
+      value: web3.utils.toWei(ethValue, 'ether')
+    }).then(async (result) => {
+      setBuyLoading(false);
+      console.log(result);
+      return result;
+    });
 
-      await presaleContract.methods.buyTokens(account).send({
-        from: account,
-        value: web3.utils.toWei(ethValue, 'ether')
-      });
-
-      alert('Purchase successful!');
-    } catch (error) {
-      console.error('Purchase failed:', error);
-      alert('Purchase failed. Please try again.');
-    }
+    showToastPromise(sendTx).finally(() => {
+      setBuyLoading(false);
+    });
   };
 
   return (
@@ -91,8 +94,12 @@ const Buy = () => {
         </label>
       </label>
       {!wallet ? <ConnectWallet /> : 
-        <button className='btn btn-neutral' onClick={handleBuy}>
-          Buy
+        <button className='btn btn-neutral' onClick={handleBuy} disabled={buyLoading}>
+          {buyLoading ? 
+          <>
+            <Loading /> Buying...
+          </>
+          : 'Buy'}
         </button>
       }
     </div>

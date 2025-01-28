@@ -70,12 +70,14 @@ export const ContractProvider = ({ children }) => {
         const rate = await presaleContract.methods.rate().call();
         const owner = await presaleContract.methods.owner().call();
         const token = await presaleContract.methods.token().call();
-        const presaleSupply = await tokenContract.methods.balanceOf(owner).call();
+        const presaleSupply = await tokenContract.methods.balanceOf(Address.PRESALE_ADDRESS).call();
+        const weiRaised = await presaleContract.methods.weiRaised().call();
 
         setPresale({
           rate,
           owner,
           token,
+          weiRaised,
           presaleSupply
         });
         setLoading(false);
