@@ -35,7 +35,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to={'/'} className="text-xl font-medium">
-            <span className='font-bold'>D<FaEthereum className='inline w-2.5' />pp</span>Learning
+            <span className='font-bold'>Dapp</span>Learning
           </Link>
         </div>
         <div className="navbar-end">
