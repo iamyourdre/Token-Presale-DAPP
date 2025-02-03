@@ -38,7 +38,6 @@ const useWallet = () => {
     setWallet(null);
     setBalance(null);
     setShouldAutoConnect(false);
-    window.location.reload(); // Reload the page to reset the state
   };
 
   useEffect(() => {
