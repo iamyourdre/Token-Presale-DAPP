@@ -10,7 +10,7 @@ const Buy = () => {
 
   const [ethValue, setEthValue] = useState("0");
   const [buyValue, setBuyValue] = useState("0");
-  const {loading: walletLoading, wallet, balance} = useWallet();
+  const {loading: walletLoading, wallet, etherBalance} = useWallet();
   const [buyLoading, setBuyLoading] = useState(false);
 
   const handleEthValueChange = (e) => {
@@ -65,7 +65,7 @@ const Buy = () => {
       <label className="form-control w-full">
         <div className="label">
           <span className="label-text">Buy With</span>
-          <span className="label-text-alt">You have {balance ? balance.slice(0, 6) : 0} $ETH</span>
+          <span className="label-text-alt">You have {etherBalance ? etherBalance.slice(0, 6) : 0} $ETH</span>
         </div>
         <label className="input input-bordered flex items-center gap-2">
           <input 
