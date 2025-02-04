@@ -6,7 +6,7 @@ This project consists of a simple ERC20 token contract and a presale contract fo
 
 ## Demo
 
-🔗 [![](https://img.shields.io/badge/token_presale_v1-vercel_app-red)](https://token-presale-v1.vercel.app/)
+[![](https://img.shields.io/badge/token_presale_v1-vercel_app-red)](https://token-presale-v1.vercel.app/)
 
 ## Contracts
 
