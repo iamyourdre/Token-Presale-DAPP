@@ -4,7 +4,9 @@
 
 This project consists of a simple ERC20 token contract and a presale contract for the token. The presale allows users to purchase tokens at a fixed rate using Ether. The frontend is built with React to provide an interface for users to participate in the presale.
 
-## 🔗 [![](https://img.shields.io/badge/token_presale_v1-vercel_app-red)](https://token-presale-v1.vercel.app/)
+## Demo
+
+🔗 [![](https://img.shields.io/badge/token_presale_v1-vercel_app-red)](https://token-presale-v1.vercel.app/)
 
 ## Contracts
 
