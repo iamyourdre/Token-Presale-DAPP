@@ -1,4 +1,5 @@
-# Token Presale Project
+# Decentralized App for Token Presale
+![Preview](https://github.com/iamyourdre/Token-Presale-DAPP/blob/main/preview.png)
 
 ## Overview
 
